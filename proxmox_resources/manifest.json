@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2.0,
+  "id": "laka_proxmox_resources",
+  "type": "widget",
+  "name": "Proxmox Resources",
+  "namespace": "ProxmoxResources",
+  "version": "1.0",
+  "author": "LAKA Soluciones Tecnológicas",
+  "description": "Vista ejecutiva de nodos, almacenamiento, máquinas virtuales y contenedores Proxmox VE.",
+  "url": "https://www.zabbix.com/la/integrations/proxmox",
+  "actions": {
+    "widget.laka_proxmox_resources.view": {
+      "class": "WidgetView"
+    },
+    "widget.laka_proxmox_resources.history": {
+      "class": "HistoryView",
+      "layout": "layout.json"
+    }
+  },
+  "widget": {
+    "name": "Proxmox Resources",
+    "size": {
+      "width": 18,
+      "height": 8
+    },
+    "form_class": "WidgetForm",
+    "use_time_selector": false,
+    "refresh_rate": 60
+  },
+  "assets": {
+    "css": [
+      "widget.css"
+    ],
+    "js": [
+      "history.modal.js"
+    ]
+  }
+}

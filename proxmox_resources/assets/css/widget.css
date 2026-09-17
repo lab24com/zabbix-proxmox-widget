@@ -1,0 +1,483 @@
+.pve-dashboard {
+	--pve-green: #43a047;
+	--pve-orange: #e57000;
+	--pve-red: #d64b4b;
+	--pve-blue: #2f80ed;
+	--pve-muted: #76808f;
+	--pve-text: #2b2b2b;
+	--pve-surface: rgba(127, 127, 127, .045);
+	--pve-surface-soft: rgba(127, 127, 127, .025);
+	--pve-border: rgba(120, 130, 145, .22);
+	--pve-track: rgba(120, 130, 145, .16);
+	--pve-sticky: #fff;
+	display: flex;
+	flex-direction: column;
+	gap: 9px;
+	min-height: 100%;
+	padding: 2px;
+	color: var(--pve-text);
+}
+
+.pve-dashboard.pve-is-dark {
+	--pve-text: #e4e9ee;
+	--pve-muted: #aab6c3;
+	--pve-surface: rgba(255, 255, 255, .045);
+	--pve-surface-soft: rgba(255, 255, 255, .025);
+	--pve-border: rgba(190, 202, 214, .22);
+	--pve-track: rgba(205, 215, 225, .16);
+	--pve-sticky: #2b2b2b;
+}
+
+.pve-dashboard,
+.pve-dashboard table,
+.pve-dashboard .list-table,
+.pve-dashboard td,
+.pve-dashboard .pve-title,
+.pve-dashboard .pve-section-title,
+.pve-dashboard .pve-node-name,
+.pve-dashboard .pve-summary-value,
+.pve-dashboard .pve-progress-label,
+.pve-dashboard .pve-progress-value,
+.pve-dashboard .pve-vm-name,
+.pve-dashboard .pve-strong { color: var(--pve-text) !important; }
+.pve-dashboard th { color: var(--pve-muted) !important; }
+
+.pve-topbar,
+.pve-heading,
+.pve-node-head,
+.pve-progress-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.pve-heading { gap: 10px; justify-content: flex-start; }
+.pve-logo {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 38px;
+	height: 38px;
+	border-radius: 10px;
+	background: linear-gradient(135deg, #e57000, #ff9a2e);
+	color: #fff;
+	font-weight: 800;
+	letter-spacing: .5px;
+	box-shadow: 0 5px 14px rgba(229, 112, 0, .25);
+}
+.pve-title { font-size: 18px; font-weight: 700; line-height: 1.2; }
+.pve-subtitle,
+.pve-updated,
+.pve-summary-hint,
+.pve-progress-detail { color: var(--pve-muted); font-size: 11px; }
+
+.pve-summary {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: 9px;
+}
+.pve-summary-card {
+	position: relative;
+	min-width: 0;
+	padding: 7px 10px;
+	border: 1px solid var(--pve-border);
+	border-radius: 10px;
+	background: var(--pve-surface);
+	overflow: hidden;
+}
+.pve-summary-card::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 3px;
+	background: var(--pve-blue);
+}
+.pve-summary-storage::before { background: #8e5ad7; }
+.pve-summary-qemu::before { background: var(--pve-orange); }
+.pve-summary-lxc::before { background: #00a3a3; }
+.pve-summary-allocation::before { background: #00a3a3; }
+.pve-summary-cluster::before { background: var(--pve-green); }
+.pve-summary-down::before { background: #7d8792; }
+.pve-summary-warning::before { background: #eea319; }
+.pve-summary-critical::before { background: var(--pve-red); }
+.pve-summary-unknown::before { background: #6598c7; }
+.pve-summary-card.alert::before { background: var(--pve-red); }
+.pve-summary-problems::before { background: var(--pve-green); }
+.pve-summary-problems.alert::before { background: var(--pve-red); }
+.pve-summary-label { color: var(--pve-muted); font-size: 10px; font-weight: 700; letter-spacing: .7px; }
+.pve-summary-value { margin: 2px 0 1px; font-size: 19px; line-height: 1; font-weight: 750; }
+.pve-vm-summary { grid-template-columns: repeat(6, minmax(120px, 1fr)); }
+
+.pve-infrastructure-groups { display: flex; flex-direction: column; gap: 14px; }
+.pve-infrastructure-card {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 10px;
+	border: 1px solid var(--pve-border);
+	border-radius: 11px;
+	background: var(--pve-surface-soft);
+}
+.pve-infrastructure-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--pve-border); }
+.pve-infrastructure-identity { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.pve-infrastructure-icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; background: linear-gradient(135deg, #d96900, #ff9a2e); color: #fff; font-size: 11px; font-weight: 800; box-shadow: 0 4px 10px rgba(229, 112, 0, .18); }
+.pve-infrastructure-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 15px; font-weight: 750; }
+.pve-infrastructure-host { margin-top: 2px; color: var(--pve-muted); font-size: 10px; }
+.pve-infrastructure-meta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 5px; }
+.pve-infrastructure-meta span { padding: 3px 7px; border-radius: 999px; background: var(--pve-track); color: var(--pve-muted); font-size: 10px; font-weight: 650; white-space: nowrap; }
+.pve-infrastructure-card > .pve-panels { gap: 14px; }
+
+.pve-vm-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.pve-vm-search-wrap {
+	display: flex;
+	box-sizing: border-box;
+	align-items: center;
+	gap: 7px;
+	min-width: min(390px, 100%);
+	padding: 0 9px;
+	border: 1px solid var(--pve-border);
+	border-radius: 7px;
+	background: var(--pve-surface-soft);
+}
+.pve-vm-search-icon { color: var(--pve-muted); font-size: 17px; }
+.pve-vm-search {
+	flex: 1 1 auto;
+	min-width: 100px;
+	height: 31px;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	color: var(--pve-text);
+	font: inherit;
+}
+.pve-vm-search::placeholder { color: var(--pve-muted); opacity: .9; }
+.pve-vm-result-count,
+.pve-vm-group-count { padding: 3px 7px; border-radius: 999px; background: var(--pve-track); color: var(--pve-text); font-size: 10px; font-weight: 700; white-space: nowrap; }
+.pve-vm-filters { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 5px; }
+.pve-vm-toolbar-actions { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 8px; }
+.pve-vm-filter {
+	padding: 6px 9px;
+	border: 1px solid var(--pve-border);
+	border-radius: 6px;
+	background: var(--pve-surface-soft);
+	color: var(--pve-text);
+	cursor: pointer;
+	font: inherit;
+	font-size: 10px;
+	font-weight: 650;
+}
+.pve-vm-filter:hover { border-color: #18a7a0; color: #18a7a0; }
+.pve-vm-filter.is-active { border-color: #18a7a0; background: rgba(24, 167, 160, .15); color: #138b85; }
+.pve-is-dark .pve-vm-filter.is-active { color: #50d2cb; }
+.pve-vm-pagination { display: flex; align-items: center; gap: 5px; }
+.pve-vm-page-size,
+.pve-vm-page-button {
+	height: 29px;
+	border: 1px solid var(--pve-border);
+	border-radius: 6px;
+	background: var(--pve-surface-soft);
+	color: var(--pve-text);
+	font: inherit;
+	font-size: 10px;
+}
+.pve-vm-page-size { padding: 0 7px; }
+.pve-vm-page-size option { background: #fff; color: #2b2b2b; }
+.pve-is-dark .pve-vm-page-size {
+	border-color: rgba(190, 202, 214, .32);
+	background: #34373b;
+	color: #e8edf2;
+	color-scheme: dark;
+}
+.pve-is-dark .pve-vm-page-size option { background: #34373b; color: #e8edf2; }
+.pve-is-dark .pve-vm-page-size option:checked { background: #2378c5; color: #fff; }
+.pve-vm-page-button { min-width: 29px; padding: 0 7px; cursor: pointer; font-size: 17px; line-height: 1; }
+.pve-vm-page-button:hover:not(:disabled) { border-color: #18a7a0; color: #18a7a0; }
+.pve-vm-page-button:disabled { cursor: default; opacity: .35; }
+.pve-vm-page-info { min-width: 42px; color: var(--pve-muted); font-size: 10px; font-weight: 700; text-align: center; }
+.pve-vm-focus-panel {
+	max-height: var(--pve-vm-panel-height, 748px);
+	border: 1px solid var(--pve-border);
+	border-radius: 9px;
+	background: var(--pve-surface-soft);
+	overflow: auto;
+	scrollbar-gutter: stable;
+}
+.pve-vm-group-head { display: flex; align-items: center; gap: 8px; padding: 9px 11px; border-bottom: 1px solid var(--pve-border); }
+.pve-vm-group-title { font-size: 13px; font-weight: 700; }
+.pve-vm-focus-table { margin: 0; min-width: 1120px; }
+.pve-vm-focus-table th { font-size: 10px; font-weight: 700; letter-spacing: .25px; text-transform: uppercase; }
+.pve-vm-focus-table thead th { position: sticky; top: 0; z-index: 3; background: var(--pve-sticky) !important; }
+.pve-vm-focus-table td { padding-top: 6px; padding-bottom: 6px; }
+.pve-vm-focus-table .pve-vm-identity { min-width: 180px; }
+.pve-vm-focus-table .pve-resource { min-width: 145px; }
+.pve-vm-focus-table .pve-progress-label { display: none !important; }
+.pve-vm-focus-table .pve-resource {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	align-items: center;
+	column-gap: 8px;
+	row-gap: 4px;
+}
+.pve-vm-focus-table .pve-progress-head { display: contents; }
+.pve-vm-focus-table .pve-progress-value { grid-column: 2; grid-row: 1; }
+.pve-vm-focus-table .pve-progress-detail {
+	grid-column: 1;
+	grid-row: 1;
+	margin-top: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.pve-vm-focus-table .pve-progress-track {
+	grid-column: 1 / -1;
+	grid-row: 2;
+	margin-top: 0;
+}
+.pve-vm-filter-empty { padding: 28px 16px; color: var(--pve-muted); text-align: center; }
+.pve-global-vms { display: flex; flex-direction: column; gap: 10px; }
+.pve-global-lxc { padding-top: 4px; }
+
+.pve-tabs {
+	display: flex;
+	gap: 4px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid rgba(120, 130, 145, .22);
+	overflow-x: auto;
+}
+.pve-tab {
+	flex: 0 0 auto;
+	padding: 7px 11px;
+	border: 0;
+	border-radius: 7px;
+	background: transparent;
+	color: var(--pve-muted);
+	cursor: pointer;
+	font: inherit;
+	font-weight: 600;
+}
+.pve-tab:hover { background: rgba(229, 112, 0, .08); color: var(--pve-orange); }
+.pve-tab.is-active { background: rgba(229, 112, 0, .14); color: var(--pve-orange); }
+.pve-panel { display: none; }
+.pve-panel.is-active { display: block; }
+.pve-panels { display: flex; flex-direction: column; gap: 16px; }
+.pve-section-title { margin-bottom: 8px; font-size: 13px; font-weight: 700; }
+
+.pve-node-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+	gap: 10px;
+}
+.pve-node-card {
+	padding: 13px;
+	border: 1px solid var(--pve-border);
+	border-radius: 11px;
+	background: var(--pve-surface-soft);
+}
+.pve-node-title { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.pve-node-name { font-size: 15px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; }
+.pve-status-dot { width: 9px; height: 9px; border-radius: 50%; background: #969da8; box-shadow: 0 0 0 3px rgba(150, 157, 168, .12); }
+.pve-status-dot.pve-status-up { background: var(--pve-green); box-shadow: 0 0 0 3px rgba(67, 160, 71, .13); }
+.pve-status-dot.pve-status-down { background: var(--pve-red); box-shadow: 0 0 0 3px rgba(214, 75, 75, .13); }
+.pve-status-pill {
+	display: inline-block;
+	padding: 3px 7px;
+	border-radius: 999px;
+	background: rgba(150, 157, 168, .13);
+	color: #777f8b;
+	font-size: 10px;
+	font-weight: 700;
+	white-space: nowrap;
+}
+.pve-status-pill.pve-status-up { background: rgba(67, 160, 71, .13); color: #328238; }
+.pve-status-pill.pve-status-down { background: rgba(214, 75, 75, .13); color: #bb3737; }
+.pve-status-pill.pve-health-normal { background: rgba(24, 167, 160, .13); color: #138b85; }
+.pve-status-pill.pve-health-warning { background: rgba(238, 163, 25, .15); color: #b87500; }
+.pve-status-pill.pve-health-critical { background: rgba(214, 75, 75, .16); color: #c43c3c; }
+.pve-is-dark .pve-status-pill.pve-health-normal { color: #50d2cb; }
+.pve-is-dark .pve-status-pill.pve-health-warning { color: #ffc04f; }
+.pve-is-dark .pve-status-pill.pve-health-critical { color: #ff7777; }
+
+.pve-node-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 9px; }
+.pve-meta-item { font-size: 11px; }
+.pve-meta-label { margin-right: 5px; color: var(--pve-muted); }
+.pve-node-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.pve-node-badges:empty { display: none; }
+.pve-badge { padding: 2px 6px; border-radius: 5px; background: rgba(47, 128, 237, .1); color: #2f72c9; font-size: 10px; }
+.pve-badge-warning { background: rgba(229, 112, 0, .12); color: #bf6105; }
+
+.pve-node-resources { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+.pve-progress-label,
+.pve-progress-value { font-size: 10px; font-weight: 650; }
+.pve-progress-track { height: 8px; margin-top: 5px; border-radius: 999px; background: var(--pve-track); overflow: hidden; }
+.pve-progress-fill { height: 100%; border-radius: inherit; transition: width .35s ease; }
+.pve-progress-fill.pve-ok { background: linear-gradient(90deg, #43a047, #63bd66); }
+.pve-progress-fill.pve-warning { background: linear-gradient(90deg, #ee9b20, #ffc04f); }
+.pve-progress-fill.pve-critical { background: linear-gradient(90deg, #d64b4b, #ee6a6a); }
+.pve-progress-fill.pve-unknown { background: #a8adb5; }
+.pve-progress-detail { margin-top: 3px; white-space: nowrap; }
+.pve-chart-trigger { position: relative; cursor: pointer; border-radius: 6px; outline: none; }
+.pve-chart-trigger:hover { background: rgba(40, 169, 226, .06); box-shadow: 0 0 0 4px rgba(40, 169, 226, .06); }
+.pve-chart-trigger:focus { box-shadow: 0 0 0 2px rgba(40, 169, 226, .35); }
+.pve-chart-trigger::after { content: '↗'; position: absolute; top: 0; right: 0; color: #28a9e2; font-size: 10px; font-weight: 800; opacity: .65; }
+.pve-chart-trigger.pve-chart-loading { cursor: wait; opacity: .65; }
+.pve-chart-trigger.pve-chart-loading::after { content: '…'; animation: pve-pulse .8s ease-in-out infinite alternate; }
+@keyframes pve-pulse { from { opacity: .25; } to { opacity: 1; } }
+
+.pve-panel .list-table { width: 100%; }
+.pve-panel .list-table th { white-space: nowrap; }
+.pve-panel .list-table td { vertical-align: middle; }
+.pve-panel .pve-resource { min-width: 110px; }
+.pve-panel table .pve-resource .pve-progress-label { display: none; }
+.pve-panel table .pve-resource.pve-guest-meter .pve-progress-label { display: inline; }
+.pve-strong { font-weight: 650; }
+.pve-vm-identity { min-width: 155px; }
+.pve-vm-summary-trigger { padding: 4px 5px; margin: -4px -5px; border-radius: 6px; cursor: pointer; outline: none; }
+.pve-vm-summary-trigger:hover { background: rgba(40, 169, 226, .08); }
+.pve-vm-summary-trigger:focus { box-shadow: 0 0 0 2px rgba(40, 169, 226, .35); }
+.pve-vm-summary-trigger .pve-vm-name { color: #258fc5 !important; }
+.pve-is-dark .pve-vm-summary-trigger .pve-vm-name { color: #65c8f4 !important; }
+.pve-vm-name { max-width: 230px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700; }
+.pve-vm-id { margin-top: 3px; color: var(--pve-muted); font-size: 10px; }
+.pve-guest-meter { min-width: 150px !important; }
+.pve-guest-meter .pve-progress-track { height: 9px; }
+.pve-guest-meter .pve-progress-value { font-size: 12px; }
+.pve-guest-meter .pve-progress-detail { font-size: 10px; }
+.pve-trend-up { color: #c57200; font-weight: 700; }
+.pve-trend-down { color: #328238; font-weight: 700; }
+.pve-io-pair { display: flex; flex-direction: column; gap: 5px; min-width: 112px; font-size: 11px; font-weight: 600; }
+.pve-dashboard .pve-io-in,
+.pve-dashboard .pve-io-read { color: #438fe9 !important; }
+.pve-dashboard .pve-io-out,
+.pve-dashboard .pve-io-write { color: #a66bd0 !important; }
+.pve-dashboard .pve-text-free { color: #3e9b48 !important; font-weight: 600; }
+.pve-dashboard .pve-text-critical { color: #d65149 !important; font-weight: 700; }
+.pve-empty {
+	padding: 28px 16px;
+	border: 1px dashed rgba(120, 130, 145, .32);
+	border-radius: 10px;
+	color: var(--pve-muted);
+	text-align: center;
+}
+.pve-severity { display: inline-block; min-width: 82px; padding: 3px 7px; border-radius: 5px; font-size: 10px; font-weight: 700; text-align: center; }
+.pve-severity-0 { background: #e4e6e9; color: #565d66; }
+.pve-severity-1 { background: #d9ebff; color: #27689e; }
+.pve-severity-2 { background: #fff1b8; color: #8a6900; }
+.pve-severity-3 { background: #ffd8a8; color: #9a5100; }
+.pve-severity-4 { background: #ffc1bd; color: #a62820; }
+.pve-severity-5 { background: #e45656; color: #fff; }
+
+.pve-dashboard.is-compact .pve-topbar { align-items: flex-start; }
+.pve-dashboard.is-compact .pve-updated { display: none; }
+.pve-dashboard.is-compact .pve-summary { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+.pve-dashboard.is-compact .pve-node-grid { grid-template-columns: 1fr; }
+.pve-dashboard.is-compact .pve-node-resources { grid-template-columns: 1fr; }
+
+@media (max-width: 1100px) {
+	.pve-summary { grid-template-columns: repeat(3, minmax(125px, 1fr)); }
+	.pve-vm-toolbar { align-items: stretch; flex-direction: column; }
+	.pve-vm-search-wrap { width: 100%; }
+	.pve-vm-filters { justify-content: flex-start; }
+	.pve-vm-toolbar-actions { justify-content: flex-start; }
+}
+
+@media (max-width: 620px) {
+	.pve-infrastructure-head { align-items: flex-start; flex-direction: column; }
+	.pve-infrastructure-meta { justify-content: flex-start; }
+}
+
+.pve-error {
+	margin: 18px;
+	padding: 16px;
+	border: 1px solid rgba(214, 75, 75, .35);
+	border-radius: 10px;
+	background: rgba(214, 75, 75, .08);
+	color: #a62f2f;
+}
+.pve-error-title { margin-bottom: 6px; font-size: 14px; font-weight: 700; }
+.pve-error-detail { font-family: monospace; font-size: 11px; overflow-wrap: anywhere; }
+
+body.pve-modal-open { overflow: hidden; }
+.pve-chart-modal-backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: 100000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 24px;
+	background: rgba(19, 28, 38, .58);
+	backdrop-filter: blur(2px);
+}
+.pve-chart-modal {
+	--pve-modal-text: #292929;
+	--pve-modal-muted: #76808f;
+	--pve-modal-surface: #fff;
+	--pve-modal-card: rgba(127, 127, 127, .035);
+	--pve-modal-border: rgba(120, 130, 145, .25);
+	width: min(1120px, 96vw);
+	max-height: 92vh;
+	overflow: auto;
+	border: 1px solid var(--pve-modal-border);
+	border-radius: 12px;
+	background: var(--pve-modal-surface);
+	color: var(--pve-modal-text);
+	box-shadow: 0 20px 60px rgba(0, 0, 0, .32);
+}
+.pve-chart-modal.pve-is-dark {
+	--pve-modal-text: #e8edf2;
+	--pve-modal-muted: #aab6c3;
+	--pve-modal-surface: #2b2d30;
+	--pve-modal-card: rgba(255, 255, 255, .045);
+	--pve-modal-border: rgba(190, 202, 214, .25);
+}
+.pve-chart-modal-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; padding: 16px 18px 12px; border-bottom: 1px solid rgba(120, 130, 145, .2); }
+.pve-chart-modal-title { font-size: 17px; font-weight: 750; }
+.pve-chart-modal-subtitle { margin-top: 4px; color: var(--pve-modal-muted); font-size: 11px; }
+.pve-chart-modal-close { width: 31px; height: 31px; border: 0; border-radius: 7px; background: rgba(120, 130, 145, .12); color: inherit; cursor: pointer; font-size: 23px; line-height: 1; }
+.pve-chart-modal-close:hover { background: rgba(214, 75, 75, .14); color: #bb3737; }
+.pve-chart-periods { display: flex; align-items: center; justify-content: flex-end; gap: 5px; padding: 10px 18px 0; }
+.pve-chart-periods > span { margin-right: 3px; color: var(--pve-modal-muted); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+.pve-chart-period { padding: 5px 10px; border: 1px solid var(--pve-modal-border); border-radius: 6px; background: var(--pve-modal-card); color: inherit; cursor: pointer; font: inherit; font-size: 11px; font-weight: 650; }
+.pve-chart-period:hover { border-color: #28a9e2; }
+.pve-chart-period[aria-pressed="true"] { border-color: #28a9e2; background: rgba(40, 169, 226, .16); color: #1687bb; }
+.pve-chart-modal.pve-is-dark .pve-chart-period[aria-pressed="true"] { color: #65c8f4; }
+.pve-chart-modal-stats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 9px; padding: 10px 18px 2px; }
+.pve-chart-stat { display: flex; flex-direction: column; gap: 3px; padding: 9px 11px; border: 1px solid var(--pve-modal-border); border-radius: 8px; background: var(--pve-modal-card); }
+.pve-chart-stat span { color: var(--pve-modal-muted); font-size: 10px; text-transform: uppercase; letter-spacing: .45px; }
+.pve-chart-stat strong { font-size: 18px; }
+.pve-chart-large { position: relative; height: 390px; padding: 8px 16px 16px; }
+.pve-chart-large.pve-chart-empty { display: flex; align-items: center; justify-content: center; color: var(--pve-modal-muted); }
+.pve-chart-large svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.pve-chart-grid { stroke: rgba(120, 145, 165, .28); stroke-width: 1; stroke-dasharray: 3 3; }
+.pve-chart-axis-label { fill: var(--pve-modal-muted); font-size: 11px; }
+.pve-chart-area { opacity: .27; }
+.pve-chart-line { stroke-width: 2; vector-effect: non-scaling-stroke; }
+.pve-chart-cursor { stroke: #d45b5b; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.pve-chart-dot { stroke: #fff; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.pve-chart-tooltip { position: absolute; z-index: 2; min-width: 175px; padding: 8px 10px; border: 1px solid var(--pve-modal-border); border-radius: 6px; background: var(--pve-modal-surface); color: var(--pve-modal-text); box-shadow: 0 5px 18px rgba(0, 0, 0, .18); pointer-events: none; font-size: 11px; }
+.pve-vm-detail-modal { width: min(820px, 96vw); }
+.pve-vm-detail-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 9px; padding: 14px 18px 5px; }
+.pve-vm-detail-resources { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; padding: 10px 18px; }
+.pve-vm-detail-resource { padding: 12px; border: 1px solid var(--pve-modal-border); border-radius: 9px; background: var(--pve-modal-card); }
+.pve-vm-detail-resource-head { display: flex; justify-content: space-between; gap: 10px; }
+.pve-vm-detail-track { height: 10px; margin: 9px 0 7px; border-radius: 999px; background: rgba(120, 130, 145, .18); overflow: hidden; }
+.pve-vm-detail-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, #43a047, #63bd66); }
+.pve-vm-detail-fill.is-warning { background: linear-gradient(90deg, #ee9b20, #ffc04f); }
+.pve-vm-detail-fill.is-critical { background: linear-gradient(90deg, #d64b4b, #ee6a6a); }
+.pve-vm-detail-io { display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px; padding: 0 18px 18px; }
+.pve-vm-detail-io-card { display: flex; flex-direction: column; gap: 7px; padding: 12px; border: 1px solid var(--pve-modal-border); border-radius: 9px; background: var(--pve-modal-card); }
+.pve-vm-detail-io-card span { color: var(--pve-modal-muted); }
+.pve-agent-ok { color: #328238; }
+.pve-agent-warn { color: #c57200; }
+
+@media (max-width: 700px) {
+	.pve-chart-modal-backdrop { padding: 8px; }
+	.pve-chart-modal-stats { grid-template-columns: repeat(2, 1fr); }
+	.pve-chart-periods { justify-content: flex-start; overflow-x: auto; }
+	.pve-chart-large { height: 300px; padding-left: 4px; padding-right: 4px; }
+	.pve-vm-detail-grid { grid-template-columns: repeat(2, 1fr); }
+	.pve-vm-detail-resources,
+	.pve-vm-detail-io { grid-template-columns: 1fr; }
+}
