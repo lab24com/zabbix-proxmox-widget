@@ -34,9 +34,8 @@ unzip -o ProxmoxResources.zip
 chown -R nginx:nginx proxmox_resources
 find proxmox_resources -type d -exec chmod 755 {} \;
 find proxmox_resources -type f -exec chmod 644 {} \;
-
+```
 
 Si no se selecciona ningún host, el widget detecta primero los ítems maestros oficiales `proxmox.cluster.resources` y `proxmox_ve.get_node_data`.
-
-## Nota: Para les que funcion al 100% necesitan tener instalado en su VMS Qemu-guest-agent 
+Nota: Para que les funcion al 100% necesitan tener instalado en su VMS Qemu-guest-agent 
 
